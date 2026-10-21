@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eae6ff">
+  <meta name="description" content="El pequeño rincón creativo de Christel: ideas, pasiones y sueños en las nubes.">
+  <title>Christel — un rincón entre nubes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #4a3b69;
+      --muted: #817598;
+      --lilac: #8a5cf5;
+      --paper: #fff;
+      --line: rgba(115, 88, 167, .1);
+      --shadow: 0 18px 48px rgba(94, 68, 155, .12), 0 3px 9px rgba(94, 68, 155, .06);
+      --font-display: 'Nunito', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--ink);
+      font-family: var(--font-body);
+      background: linear-gradient(145deg, #eae6ff 0%, #d8ccff 38%, #c8b6ff 72%, #bbadff 100%);
+    }
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: radial-gradient(rgba(255,255,255,.38) .8px, transparent .8px);
+      background-size: 22px 22px;
+      content: '';
+      pointer-events: none;
+    }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #8a5cf5; outline-offset: 4px; }
+
+    .sky-art {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .sky-cloud {
+      position: absolute;
+      width: var(--width);
+      height: calc(var(--width) * .34);
+      border-radius: 999px;
+      opacity: .48;
+      background: rgba(255,255,255,.53);
+      filter: blur(.2px);
+      animation: drift var(--speed) ease-in-out infinite alternate;
+    }
+    .sky-cloud::before, .sky-cloud::after {
+      position: absolute;
+      bottom: 22%;
+      border-radius: 50%;
+      background: inherit;
+      content: '';
+    }
+    .sky-cloud::before { left: 18%; width: 43%; aspect-ratio: 1; }
+    .sky-cloud::after { left: 46%; width: 32%; aspect-ratio: 1; }
+    .cloud-one { top: 13%; left: -5%; --width: 260px; --speed: 8s; }
+    .cloud-two { top: 58%; right: -7%; --width: 340px; --speed: 11s; animation-delay: -4s; }
+    .cloud-three { top: 82%; left: 12%; --width: 180px; --speed: 9s; animation-delay: -2s; opacity: .3; }
+    @keyframes drift { from { transform: translate3d(-8px, 5px, 0); } to { transform: translate3d(18px, -12px, 0); } }
+
+    .page-shell { width: min(1080px, calc(100% - 40px)); margin-inline: auto; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 25px 0 12px;
+    }
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--font-display);
+      font-size: 1.12rem;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .wordmark-icon { color: var(--lilac); font-size: 1.28rem; }
+    .top-note { color: var(--muted); font-size: .78rem; font-weight: 700; letter-spacing: .04em; }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 330px;
+      grid-template-columns: 1fr 220px;
+      align-items: center;
+      gap: 28px;
+      padding: 44px 54px 46px;
+      margin: 22px 0 26px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 36px;
+      background: rgba(255,255,255,.65);
+      box-shadow: 0 20px 58px rgba(91,67,149,.13), inset 0 1px rgba(255,255,255,.85);
+      backdrop-filter: blur(14px);
+    }
+    .hero::after {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      top: -170px;
+      left: 44%;
+      border-radius: 50%;
+      background: rgba(255,255,255,.48);
+      content: '';
+    }
+    .eyebrow, .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--lilac);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 640px;
+      margin: 14px 0 12px;
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.4vw, 4.35rem);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.04;
+    }
+    h1 .name { color: var(--lilac); }
+    .hero-copy { max-width: 490px; margin-bottom: 24px; color: #756b88; font-size: 1rem; line-height: 1.75; }
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 999px;
+      color: white;
+      background: var(--lilac);
+      box-shadow: 0 8px 18px rgba(138,92,245,.23);
+      font: 800 .83rem var(--font-body);
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .hero-link:hover { transform: translateY(-3px); box-shadow: 0 12px 22px rgba(138,92,245,.3); }
+    .avatar-wrap { position: relative; justify-self: center; width: 188px; aspect-ratio: 1; }
+    .avatar-halo { position: absolute; inset: 5px; border: 1px dashed rgba(138,92,245,.36); border-radius: 50%; animation: orbit 30s linear infinite; }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+    .avatar {
+      position: absolute;
+      inset: 20px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 7px solid rgba(255,255,255,.88);
+      border-radius: 48% 52% 48% 52%;
+      background: linear-gradient(145deg, #ffe0e9, #f1d8ff 56%, #fff0c7);
+      box-shadow: 0 15px 32px rgba(96,67,155,.15);
+      font-size: 4.55rem;
+      transform: rotate(-5deg);
+    }
+    .sparkle { position: absolute; color: #edb94e; font-size: 1.35rem; }
+    .sparkle-a { top: 8px; right: 13px; }
+    .sparkle-b { bottom: 11px; left: 3px; font-size: 1rem; }
+
+    .mural-label { display: flex; justify-content: space-between; align-items: end; margin: 0 4px 14px; }
+    .mural-label h2 { margin: 5px 0 0; font-family: var(--font-display); font-size: 1.28rem; font-weight: 900; }
+    .mural-label p { margin: 0; color: var(--muted); font-size: .75rem; }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-auto-rows: minmax(180px, auto);
+      gap: 16px;
+    }
+    .cloud-card {
+      position: relative;
+      min-width: 0;
+      padding: 25px 27px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.86);
+      border-radius: 30px;
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--shadow);
+      transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease;
+    }
+    .cloud-card:hover { z-index: 1; transform: translateY(-8px) rotate(-.5deg); box-shadow: 0 26px 56px rgba(94,68,155,.18), 0 0 30px rgba(255,255,255,.48); }
+    .cloud-card h3 { margin: 10px 0 9px; font-family: var(--font-display); font-size: 1.2rem; font-weight: 900; }
+    .cloud-card p { margin-bottom: 0; color: #766c87; font-size: .88rem; line-height: 1.7; }
+    .card-icon { display: grid; width: 39px; height: 39px; place-items: center; border-radius: 14px; background: #f1ebff; font-size: 1.2rem; }
+    .about { grid-column: span 5; }
+    .about .mini-note { display: inline-flex; gap: 7px; align-items: center; padding: 8px 11px; margin-top: 16px; border-radius: 999px; color: #7654c7; background: #f5f0ff; font-size: .73rem; font-weight: 800; }
+    .projects { grid-column: span 7; }
+    .project-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin-top: 15px; }
+    .project {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fcfbff;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .2s ease, transform .2s ease, background .2s ease;
+    }
+    .project:hover, .project[aria-pressed="true"] { transform: translateY(-3px); border-color: rgba(138,92,245,.38); background: #f8f4ff; }
+    .project-icon { display: grid; width: 37px; height: 37px; flex: 0 0 37px; place-items: center; border-radius: 13px; background: #fff1c5; font-size: 1.08rem; }
+    .project:nth-child(2) .project-icon { background: #ffdce5; }
+    .project:nth-child(3) .project-icon { background: #e6f4e9; }
+    .project:nth-child(4) .project-icon { background: #e8e1ff; }
+    .project strong { display: block; font-family: var(--font-display); font-size: .79rem; font-weight: 900; }
+    .project small { display: block; margin-top: 3px; color: var(--muted); font-size: .68rem; }
+    .project-detail { min-height: 1.35em; margin-top: 11px !important; color: #8a5cf5 !important; font-size: .76rem !important; }
+    .hobbies { grid-column: span 7; }
+    .pill-cloud { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 17px; }
+    .hobby-pill { display: inline-flex; align-items: center; gap: 7px; padding: 10px 13px; border: 1px solid transparent; border-radius: 999px; font-size: .78rem; font-weight: 800; transition: transform .22s ease, box-shadow .22s ease; }
+    .hobby-pill:hover { transform: translateY(-5px) rotate(-2deg); box-shadow: 0 8px 16px rgba(74,59,105,.12); }
+    .pill-yellow { background: #fff1c5; }
+    .pill-pink { background: #ffdce5; }
+    .pill-lilac { background: #eee7ff; }
+    .pill-green { background: #e5f5e8; }
+    .quote { grid-column: span 5; display: flex; flex-direction: column; justify-content: space-between; min-height: 210px; background: #fff8df; }
+    .quote::after { position: absolute; right: -25px; bottom: -42px; width: 140px; height: 140px; border: 22px solid rgba(255,255,255,.54); border-radius: 50%; content: ''; }
+    .quote .card-icon { background: #ffedb7; }
+    .quote blockquote { position: relative; z-index: 1; margin: 8px 0 12px; font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; line-height: 1.5; }
+    .quote cite { color: #9d8963; font-size: .72rem; font-style: normal; font-weight: 700; }
+
+    .bottom-area { display: grid; grid-template-columns: 1fr 1.1fr; gap: 16px; margin-top: 16px; }
+    .contact-panel, .check-panel { padding: 22px 25px; border: 1px solid rgba(255,255,255,.8); border-radius: 28px; background: rgba(255,255,255,.71); box-shadow: 0 12px 32px rgba(94,68,155,.09); backdrop-filter: blur(10px); }
+    .contact-panel h2, .check-panel h2 { margin: 0 0 5px; font-family: var(--font-display); font-size: 1.08rem; font-weight: 900; }
+    .contact-panel > p, .check-panel > p { margin: 0 0 14px; color: var(--muted); font-size: .75rem; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .contact-link { display: inline-flex; align-items: center; gap: 7px; padding: 9px 12px; border: 1px solid rgba(138,92,245,.13); border-radius: 999px; color: #6847ad; background: white; font-size: .73rem; font-weight: 800; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+    .contact-link:hover { transform: translateY(-3px); background: #f8f4ff; }
+    .criteria { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 12px; margin: 0; padding: 0; list-style: none; }
+    .criteria li { display: flex; align-items: flex-start; gap: 7px; color: #716582; font-size: .7rem; line-height: 1.4; }
+    .criteria li::before { content: '✓'; color: #7e5bd0; font-weight: 900; }
+    footer { display: flex; justify-content: space-between; gap: 12px; padding: 21px 4px 27px; color: #716582; font-size: .7rem; }
+    .footer-heart { color: #d47b9b; }
+
+    @media (max-width: 760px) {
+      .page-shell { width: min(100% - 28px, 560px); }
+      .hero { min-height: auto; grid-template-columns: 1fr 125px; gap: 7px; padding: 35px 25px; border-radius: 30px; }
+      .avatar-wrap { width: 130px; }
+      .avatar { inset: 16px; border-width: 5px; font-size: 3rem; }
+      h1 { font-size: clamp(2.25rem, 9vw, 3.2rem); }
+      .hero-copy { font-size: .9rem; }
+      .bento-grid { grid-auto-rows: auto; gap: 12px; }
+      .about, .projects, .hobbies, .quote { grid-column: span 12; }
+      .about, .projects, .hobbies, .quote { min-height: 0; }
+      .bottom-area { grid-template-columns: 1fr; gap: 12px; }
+    }
+    @media (max-width: 430px) {
+      .page-shell { width: calc(100% - 24px); }
+      .topbar { padding-top: 18px; }
+      .top-note { max-width: 112px; text-align: right; line-height: 1.4; }
+      .hero { grid-template-columns: 1fr 82px; padding: 29px 19px; }
+      .avatar-wrap { width: 92px; }
+      .avatar { inset: 12px; font-size: 2.4rem; }
+      .hero-link { padding: 11px 13px; font-size: .76rem; }
+      .mural-label p { display: none; }
+      .cloud-card { padding: 22px 20px; border-radius: 25px; }
+      .project-list { grid-template-columns: 1fr; }
+      .criteria { grid-template-columns: 1fr; }
+      footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sky-art" aria-hidden="true">
+    <span class="sky-cloud cloud-one"></span>
+    <span class="sky-cloud cloud-two"></span>
+    <span class="sky-cloud cloud-three"></span>
+  </div>
+
+  <div class="page-shell">
+    <nav class="topbar" aria-label="Navegación principal">
+      <a class="wordmark" href="#inicio"><span class="wordmark-icon" aria-hidden="true">☁</span> el mundo de Christel</a>
+      <span class="top-note">un pequeño lugar para soñar despierta</span>
+    </nav>
+
+    <header class="hero" id="inicio">
+      <div>
+        <span class="eyebrow"><span aria-hidden="true">✦</span> mi rincón en internet</span>
+        <h1>¡Hola, soy <span class="name">Christel</span>! <span aria-label="nube y estrellas">☁️✨</span></h1>
+        <p class="hero-copy">Bienvenida a mi pedacito de cielo: un mural de ideas bonitas, proyectos con cariño y pequeñas cosas que hacen especial cada día.</p>
+        <a class="hero-link" href="#mural">Pasea por mi mural <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="avatar-wrap" aria-label="Avatar decorativo de Christel">
+        <div class="avatar-halo" aria-hidden="true"></div>
+        <div class="avatar" role="img" aria-label="Ilustración de una chica sonriendo">👩🏻‍🎨</div>
+        <span class="sparkle sparkle-a" aria-hidden="true">✦</span>
+        <span class="sparkle sparkle-b" aria-hidden="true">✧</span>
+      </div>
+    </header>
+
+    <main id="mural">
+      <div class="mural-label">
+        <div><span class="section-kicker">mi universo, en pequeño</span><h2>Un mural de cosas que me hacen ser yo</h2></div>
+        <p>hecho con calma y un poquito de magia ✨</p>
+      </div>
+
+      <section class="bento-grid" aria-label="Mural personal de Christel">
+        <article class="cloud-card about">
+          <span class="card-icon" aria-hidden="true">☁️</span>
+          <h3>Quién soy</h3>
+          <p>Soy Christel: curiosa, soñadora y siempre guardando ideas bonitas en los bolsillos. Me encanta crear, aprender cosas nuevas y encontrar inspiración en los detalles más sencillos.</p>
+          <span class="mini-note"><span aria-hidden="true">🌷</span> creciendo a mi propio ritmo</span>
+        </article>
+
+        <article class="cloud-card projects">
+          <span class="card-icon" aria-hidden="true">💫</span>
+          <h3>Mis pasiones &amp; proyectos</h3>
+          <p>Pequeñas aventuras que me entusiasman ahora mismo.</p>
+          <div class="project-list" aria-label="Proyectos interactivos">
+            <button class="project" type="button" aria-pressed="false" data-detail="Un espacio para probar ideas, colores y nuevas formas de contar historias.">
+              <span class="project-icon" aria-hidden="true">🎨</span><span><strong>Diario creativo</strong><small>ideas en colores</small></span>
+            </button>
+            <button class="project" type="button" aria-pressed="false" data-detail="Una colección de momentos cotidianos que merecen quedarse un poquito más.">
+              <span class="project-icon" aria-hidden="true">📷</span><span><strong>Pequeños momentos</strong><small>álbum de inspiración</small></span>
+            </button>
+            <button class="project" type="button" aria-pressed="false" data-detail="Aprender algo nuevo cada semana: sin prisa, con mucha curiosidad.">
+              <span class="project-icon" aria-hidden="true">🌱</span><span><strong>Aprender bonito</strong><small>un paso cada día</small></span>
+            </button>
+            <button class="project" type="button" aria-pressed="false" data-detail="Un rincón digital que va tomando forma, nube a nube.">
+              <span class="project-icon" aria-hidden="true">💻</span><span><strong>Este rinconcito</strong><small>hecho por mí</small></span>
+            </button>
+          </div>
+          <p class="project-detail" aria-live="polite">Elige una nube para descubrir más ✨</p>
+        </article>
+
+        <article class="cloud-card hobbies">
+          <span class="card-icon" aria-hidden="true">🧸</span>
+          <h3>Mi espacio kreativo</h3>
+          <p>Mis hobbies favoritos para recargar el corazón y dejar volar la imaginación.</p>
+          <div class="pill-cloud" aria-label="Hobbies de Christel">
+            <span class="hobby-pill pill-yellow">🎧 escuchar música</span>
+            <span class="hobby-pill pill-pink">📖 leer historias</span>
+            <span class="hobby-pill pill-lilac">🖍️ dibujar</span>
+            <span class="hobby-pill pill-green">🌿 paseos tranquilos</span>
+            <span class="hobby-pill pill-yellow">☕ tardes cozy</span>
+            <span class="hobby-pill pill-pink">📸 tomar fotos</span>
+          </div>
+        </article>
+
+        <article class="cloud-card quote">
+          <div>
+            <span class="card-icon" aria-hidden="true">☀️</span>
+            <h3>Una nota para hoy</h3>
+          </div>
+          <div>
+            <blockquote>“No tienes que florecer al mismo tiempo que los demás.”</blockquote>
+            <cite>— un recordatorio para ir a mi ritmo</cite>
+          </div>
+        </article>
+      </section>
+
+      <section class="bottom-area" aria-label="Contacto y detalles técnicos">
+        <div class="contact-panel" id="contacto">
+          <h2>¿Nos encontramos por ahí?</h2>
+          <p>Siempre hay espacio para una conversación bonita.</p>
+          <div class="contact-links">
+            <a class="contact-link" href="https://instagram.com/" target="_blank" rel="noreferrer"><span aria-hidden="true">◎</span> Instagram</a>
+            <a class="contact-link" href="https://linkedin.com/" target="_blank" rel="noreferrer"><span aria-hidden="true">in</span> LinkedIn</a>
+            <a class="contact-link" href="mailto:hola@christel.com"><span aria-hidden="true">✉</span> Email</a>
+          </div>
+        </div>
+        <aside class="check-panel">
+          <h2>La lista de las nubes ☁️</h2>
+          <p>Pequeños detalles que hacen volar este mural.</p>
+          <ul class="criteria">
+            <li>Lilas, lavandas y acentos pastel</li>
+            <li>Mural Bento de nubes flotantes</li>
+            <li>Tarjetas con elevación al pasar</li>
+            <li>Nubes animadas en el fondo</li>
+            <li>Diseño adaptable a móvil y escritorio</li>
+            <li>HTML único con CSS y JavaScript internos</li>
+          </ul>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> Christel · hecho entre nubes</span>
+      <span>un poquito de cielo, un <span class="footer-heart">♥</span> enorme</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const projectButtons = document.querySelectorAll('.project');
+    const projectDetail = document.querySelector('.project-detail');
+
+    projectButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        projectButtons.forEach((item) => item.setAttribute('aria-pressed', 'false'));
+        button.setAttribute('aria-pressed', 'true');
+        projectDetail.textContent = button.dataset.detail;
+      });
+    });
+  </script>
+</body>
+</html>
